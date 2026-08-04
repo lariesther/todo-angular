@@ -1,0 +1,12 @@
+git config --global user.name lariester
+git config --global user.email larissafantinatti24@gmail.com
+
+-- verificar ambiente angular
+node -v
+npm -v 
+ng version
+
+-- instalar o angularnpm install -g @angular/cli
+
+-- criar um projeto angular
+ng new todo-angular --routing=false --style=css --skip-tests --standalone --ssr=false --file-name-style-guide=2025 --defaults
