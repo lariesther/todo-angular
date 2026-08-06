@@ -6,7 +6,22 @@ node -v
 npm -v 
 ng version
 
--- instalar o angularnpm install -g @angular/cli
+-- instalar o angular
+npm install -g @angular/cli
 
 -- criar um projeto angular
 ng new todo-angular --routing=false --style=css --skip-tests --standalone --ssr=false --file-name-style-guide=2025 --defaults
+
+-- para executar o projeto
+cd todo-angular
+ng serve --open
+
+-- para restaurar o projeto clonado
+entra na pasta
+npm i
+
+-- para criar componetes e seviços (não pode estar executando o projeto)
+ng generate component components/todo-form --skip-tests
+ng generate component components/todo-list --skip-tests
+ng generate component components/todo-item --skip-tests
+ng generate service services/todo-store --skip-tests
