@@ -6,12 +6,12 @@ import {Todo} from '../models/todo';
 })
 export class TodoStore {
   private readonly storageKey = 'todos-angular';
-  private readonly todoState = signal<Todo[]>(this.loadTodos());
+  private readonly todosState = signal<Todo[]>(this.loadTodos());
 
-  readonly todos = this.todoState.asReadonly();
-  readonly total = computed(() => this.todoState().length);
+  readonly todos = this.todosState.asReadonly();
+  readonly total = computed(() => this.todosState().length);
   readonly completed = computed(
-    () => this.todoState().filter((todo) => todo.completed).length);
+    () => this.todosState().filter((todo) => todo.completed).length);
   readonly pending = computed(() => this.total() - this.completed())
 
   add(title: string): void {
@@ -26,11 +26,27 @@ export class TodoStore {
       title: normalizedTitle,
       completed: false
     }
-    this.updateTodos([...this.todoState(), newTodo]);
+    this.updateTodos([...this.todosState(), newTodo]);
+  }
+ 
+   toggle(id: number): void {
+    const updateTodos = this.todosState().map((todo) => 
+      todo.id === id 
+    ? {...todo, completed: !todo.completed}
+    : todo
+    );
+    this.updateTodos(updateTodos)
   }
 
+  remove ( id: number): void {
+    const updateTodos = this.todosState().filter((todo)=>
+    todo.id !==id);
+    this.updateTodos(updateTodos);
+  }
+
+ 
   private updateTodos(todos: Todo[]): void {
-    this.todoState.set(todos);
+    this.todosState.set(todos);
     localStorage.setItem(this.storageKey, JSON.stringify(todos));
   }
 
