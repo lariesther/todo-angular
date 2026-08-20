@@ -1,1 +1,15 @@
-<p>todo-item works!</p>
+<li class ="todo-item" [class.completed]="todo().completed">
+    <label>
+        <input
+            type="checkbox"
+            [checked]="todo().completed"
+            (change)="todoToggled.emit(todo().id)"
+        />
+        <span>{{todo().title}}</span>
+    </label>
+    <button
+    type="submit"
+    [attr.aria-label]="'Excluira tarefa' + todo().title"
+    (click)="todoRemoved.emit(todo().id)"
+    > Excluir</button>
+</li>

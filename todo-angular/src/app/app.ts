@@ -1,11 +1,18 @@
 import { Component, signal } from '@angular/core';
+import { TodoForm } from './components/todo-form/todo-form';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [TodoForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('todo-angular');
+  ultimaTarefa ="";
+
+  showTitle(title : string): void{
+    this.ultimaTarefa = title;
+    console.log("Teste: tarefa recebida com sucdesso:", title);
+
+  }
 }
